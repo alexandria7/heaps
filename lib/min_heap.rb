@@ -71,17 +71,16 @@ class MinHeap
   #  moves it up the heap, if it is less than it's parent node.
   #  It could be **very** helpful for the add method.
   # Time complexity: O(logn) where n is the length of the @store
-  # Space complexity: O(1)
+  # Space complexity: O(logn)
   def heap_up(index)
-    while index > 0
-      parent_index = (index - 1) / 2
+    return if index <= 0
 
-      if @store[index].key < @store[parent_index].key
-        swap(index, parent_index)
-        index = parent_index
-      else
-        break
-      end
+    parent_index = (index - 1) / 2
+
+    if @store[index].key < @store[parent_index].key
+      swap(index, parent_index)
+      index = parent_index
+      heap_up(index)
     end
   end
 
